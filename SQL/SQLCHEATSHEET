@@ -1,0 +1,153 @@
+🐬 MySQL Beginner Cheat Sheet
+
+A quick reference guide for common SQL commands, tailored for MySQL Workbench users.
+
+🗂️ 1. Database Management
+
+Commands to manage the database container itself.
+
+-- Create a new database
+CREATE DATABASE my_school;
+
+-- Select the database to use (Do this first!)
+USE my_school;
+
+-- Delete a database (WARNING: Deletes everything inside)
+DROP DATABASE my_school;
+
+
+🏗️ 2. Table Management (DDL)
+
+Commands to build and modify the structure of your tables.
+
+Create a Table
+
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    enrolled_date DATETIME
+);
+
+
+Modify a Table
+
+-- Add a new column
+ALTER TABLE students 
+ADD birthdate DATE;
+
+-- Delete a column
+ALTER TABLE students 
+DROP COLUMN email;
+
+-- Change a column's data type
+ALTER TABLE students 
+MODIFY COLUMN first_name VARCHAR(100);
+
+
+Delete/Clear a Table
+
+-- Option 1: Clear all data but KEEP the table (Resets IDs)
+TRUNCATE TABLE students;
+
+-- Option 2: Delete the ENTIRE table (Structure + Data)
+DROP TABLE students;
+
+
+📝 3. Data Management (DML)
+
+Commands to Add, Edit, and Remove the actual data.
+
+Insert Data (Create)
+
+-- Insert a row with specific values
+INSERT INTO students (student_id, first_name, last_name, enrolled_date)
+VALUES (1, 'Spongebob', 'Squarepants', '2025-01-01 10:00:00');
+
+-- Insert a row using "NOW()" for the current time
+INSERT INTO students (student_id, first_name, last_name, enrolled_date)
+VALUES (2, 'Patrick', 'Star', NOW());
+
+
+Update Data (Edit)
+
+-- Update a specific student's name
+UPDATE students
+SET first_name = 'Squidward'
+WHERE student_id = 2;
+
+-- ⚠️ IMPORTANT: Always use WHERE, or you will update EVERY row!
+
+
+Delete Data (Remove)
+
+-- Delete a single row
+DELETE FROM students 
+WHERE student_id = 1;
+
+-- Delete multiple specific rows
+DELETE FROM students 
+WHERE student_id IN (1, 2, 3);
+
+
+🔍 4. Querying Data (DQL)
+
+Commands to find and view your data.
+
+Basic Selects
+
+-- View everything in the table
+SELECT * FROM students;
+
+-- View only specific columns
+SELECT first_name, last_name FROM students;
+
+
+Filtering (The WHERE Clause)
+
+-- Find specific matches
+SELECT * FROM students WHERE first_name = 'Spongebob';
+
+-- Find IDs greater than 5
+SELECT * FROM students WHERE student_id > 5;
+
+-- Find dates after a certain time
+SELECT * FROM students WHERE enrolled_date > '2025-01-01';
+
+-- Find rows where a column is empty
+SELECT * FROM students WHERE email IS NULL;
+
+
+Sorting and Limiting
+
+-- Sort by name A-Z (Ascending)
+SELECT * FROM students ORDER BY last_name ASC;
+
+-- Sort by date Newest-Oldest (Descending)
+SELECT * FROM students ORDER BY enrolled_date DESC;
+
+-- Show only the first 5 results
+SELECT * FROM students LIMIT 5;
+
+
+💡 Pro Tips & Common Errors
+
+1. Error Code: 1175 (Safe Update Mode)
+
+If MySQL Workbench refuses to let you Delete or Update, run this command once:
+
+SET SQL_SAFE_UPDATES = 0;
+
+
+2. Date Formats
+
+DATE: 'YYYY-MM-DD' (e.g., '2025-12-25')
+
+DATETIME: 'YYYY-MM-DD HH:MM:SS' (e.g., '2025-12-25 14:30:00')
+
+3. Quotes
+
+Strings (Text): Must use single quotes ('text').
+
+Numbers: No quotes needed (123).
