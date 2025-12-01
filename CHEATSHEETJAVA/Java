@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class GradingSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input scores
+        System.out.print("Assignment 1 (10 pts): ");
+        double a1 = sc.nextDouble();
+
+        System.out.print("Assignment 2 (10 pts): ");
+        double a2 = sc.nextDouble();
+
+        System.out.print("Quiz 1 (15 pts): ");
+        double q1 = sc.nextDouble();
+
+        System.out.print("Quiz 2 (15 pts): ");
+        double q2 = sc.nextDouble();
+
+        System.out.print("Long Exam (50 pts): ");
+        double longExam = sc.nextDouble();
+
+        // Convert to percentages
+        double assignmentAvg = ((a1 + a2) / 20.0) * 100;
+        double quizAvg = ((q1 + q2) / 30.0) * 100;
+        double longExamPercent = (longExam / 50.0) * 100;
+
+        // Apply weights
+        double finalGrade = (assignmentAvg * 0.20) + (quizAvg * 0.40) + (longExamPercent * 0.50);
+
+        // Grade equivalent
+        String grade;
+
+        if (finalGrade >= 100) grade = "4.0";
+        else if (finalGrade >= 95) grade = "3.0";
+        else if (finalGrade >= 85) grade = "2.0";
+        else if (finalGrade >= 75) grade = "1.0";
+        else grade = "R";
+
+        // Output
+        System.out.println("\n--- RESULT ---");
+        System.out.println("Final Percentage: " + finalGrade);
+        System.out.println("Grade Equivalent: " + grade);
+    }
+}
