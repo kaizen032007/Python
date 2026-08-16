@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build & output clips
+dist/
+build/
+clips/*.mp4
+engine/clips/*.mp4
+*.mp4
+temp/
+scratch/
+repo_work/
+temp_repo_clone/
+
+# Logs & OS / Editor files
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
